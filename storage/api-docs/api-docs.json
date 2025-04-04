@@ -1,0 +1,170 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "User Transaction API",
+        "description": "REST API для управления пользователями и транзакциями",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://my-default-host.com",
+            "description": "API сервер"
+        }
+    ],
+    "paths": {
+        "/transactions/transfer": {
+            "post": {
+                "summary": "Перевод средств между пользователями",
+                "operationId": "f5c88591ca5dacf77aaea5b9f6501116",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fromUserId",
+                                    "toUserId",
+                                    "amount"
+                                ],
+                                "properties": {
+                                    "fromUserId": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "toUserId": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "example": 100
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Перевод выполнен"
+                    },
+                    "400": {
+                        "description": "Недостаточно средств"
+                    },
+                    "404": {
+                        "description": "Пользователь не найден"
+                    }
+                }
+            }
+        },
+        "/users/{id}/transactions": {
+            "get": {
+                "summary": "История транзакций пользователя",
+                "operationId": "8ec9d6b13dc8ea6eb33bfbb2fbe122c1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "История транзакций"
+                    },
+                    "404": {
+                        "description": "Пользователь не найден"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "post": {
+                "summary": "Создание пользователя",
+                "operationId": "49b25cdfd1cc549029c3dfd6f39b4d60",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Иван"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "ivan@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Пользователь создан"
+                    },
+                    "400": {
+                        "description": "Ошибка валидации"
+                    }
+                }
+            }
+        },
+        "/users/{id}/deposit": {
+            "post": {
+                "summary": "Пополнение баланса",
+                "operationId": "801944e60fd76dea9deec0858cb0fbe5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "amount"
+                                ],
+                                "properties": {
+                                    "amount": {
+                                        "type": "number",
+                                        "example": 500
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Баланс пополнен"
+                    },
+                    "404": {
+                        "description": "Пользователь не найден"
+                    },
+                    "400": {
+                        "description": "Ошибка валидации"
+                    }
+                }
+            }
+        }
+    }
+}
