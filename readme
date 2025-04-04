@@ -1,0 +1,19 @@
+Для запуска проекта необходимо установленный docker desktop
+
+1. Запустите докер проекта командой:
+docker-compose up -d --build
+
+2. Загрузите исходные файлы Laravel используя composer
+docker exec -it laravel_app php artisan migrate
+
+3. Запустите миграцию чтобы создать все необходимые таблицы
+docker exec -it laravel_app php artisan migrate
+
+4.[Опционально] Для запуска тестов используйте комманду
+docker exec -it laravel_app php artisan test
+
+
+Внимание вся документация Swagger находится в директории storage/api-docs/api-docs.json,
+можете открыть данный файл через Swagger для просмотра дизайна API
+
+
