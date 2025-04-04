@@ -16,4 +16,8 @@ docker exec -it laravel_app php artisan test
 Внимание вся документация Swagger находится в директории storage/api-docs/api-docs.json,
 можете открыть данный файл через Swagger для просмотра дизайна API
 
+Для мануальной проверки API рекомендую использовать Postman,
+Локально к API можно обращаться по следующему адресу:
+POST \ http://localhost:8000/api/
+
 
